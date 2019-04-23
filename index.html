@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        color: red;
+        background-color: black;
+        font-family: Courier;
+      }
+
+      h2 {
+        position: fixed;
+      }
+
+      .shell {
+      	width: 100%;
+      	top: 100px;
+      	left: 20px;
+      	font-size: 20px;
+      	font-family: Courier;
+      	color: #DFDFDF;
+        bottom: 0px;
+        position: fixed;
+      }
+      .input {
+      	border: 0px;
+      	font-size: 20px;
+      	font-family: Courier;
+      	color: #DFDFDF;
+        width: 90%;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>ZIA (Zentraler Informationsdienst Abigenten)</h2>
+    <div id="shell" class="shell">
+      Operations Shell - ULTRA TOP SECRET - DO NOT USE<br/><br/>
+    </div>
+
+    <script>
+      const shell = document.querySelector("#shell");
+
+      const enter = [
+        "login username = jonas123, password=******** ",
+        "WELCOME jonas123",
+
+        "hack network Vincent-Lübeck-Gymnasium, Glückstädter-Straße 12",
+        "DONE",
+
+        "hack fire-alert",
+        "DONE",
+
+        "trigger fire-alert sector 12, smoke-detector 13",
+        "ALERT TRIGGERED",
+
+        "trigger sirene",
+        "SIRENE STARTED"
+      ];
+
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+
+      const keypress = () => new Promise(res => window.onkeydown = res);
+
+      (async function() {
+        await keypress();
+
+        let answer = true;
+        for(const words of enter) {
+          shell.innerHTML += (answer = !answer) ? ">>>>>  " : "</br>>   ";
+          for(const char of words) {
+            if(answer) await delay(100 * Math.random())
+            else await keypress();
+
+            shell.innerHTML += char;
+          }
+          shell.innerHTML += "<br/>";
+          await delay(500);
+        }
+      })();
+    </script>
+  </body>
+</html>
